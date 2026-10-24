@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTA VI Countdown</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        180deg,
+        #ff61d8 0%,
+        #b434ff 45%,
+        #1b0033 100%
+    );
+
+    position:relative;
+}
+
+/* Palm Trees */
+.palm{
+    position:absolute;
+    bottom:0;
+    font-size:18rem;
+    opacity:.15;
+}
+
+.left{
+    left:3%;
+}
+
+.right{
+    right:3%;
+}
+
+/* Sunset Glow */
+.glow{
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,105,180,.7),
+            rgba(0,217,255,.2),
+            transparent 70%
+        );
+
+    filter:blur(100px);
+}
+
+.container{
+    text-align:center;
+    z-index:2;
+}
+
+/* Title */
+h1{
+    color:white;
+    font-size:4rem;
+    font-weight:900;
+    text-shadow:
+        0 0 15px #ff4fcb,
+        0 0 30px #ff4fcb;
+    margin-bottom:12px;
+}
+
+.subtitle{
+    color:#4deeff;
+    font-size:1.2rem;
+    letter-spacing:4px;
+    margin-bottom:50px;
+}
+
+/* Timer */
+.timer{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.box{
+    width:150px;
+    padding:25px;
+
+    background:#30004d;
+
+    border:3px solid #ff6bd6;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 0 20px #ff6bd6,
+        inset 0 0 20px rgba(255,255,255,.1);
+}
+
+.number{
+    color:white;
+    font-size:3.5rem;
+    font-weight:900;
+}
+
+.label{
+    color:#acing:2px;
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+    h1{
+        font-size:2.5rem;
+    }
+
+    .box{
+        width:120px;
+    }
+
+    .number{
+        font-size:2.5rem;
+    }
+
+}
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+
+<div class="palm left">🌴</div>
+<div class="palm right">🌴</div>
+
+<div class="container">
+
+    <h1>GTA VI</h1>
+    <div class="subtitle">VICE CITY AWAITS</div>
+
+    <div class="timer">
+
+        <div class="box">
+            <div id="days" class="number">00</div>
+            <div class="label">DAYS</div>
+        </div>
+
+        <div class="box">
+            <div id="hours" class="number">00</div>
+            <div class="label">HOURS</div>
+        </div>
+
+        <div class="box">
+            <div id="minutes" class="number">00</div>
+            <div class="label">MINUTES</div>
+        </div>
+
+        <div class="box">
+            <div id="seconds" class="number">00</div>
+            <div class="label">SECONDS</div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+// GTA VI Release Date
+const targetDate = new Date("May 26, 2026 00:00:00").getTime();
+
+function updateCountdown(){
+
+    const now = new Date().getTime();
+
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+</script>
+
+</body>
+</html>
