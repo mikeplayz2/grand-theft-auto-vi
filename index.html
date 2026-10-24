@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -21,215 +21,213 @@
     box-sizing:border-box;
 }
 
-body{
-    font-family:'Montserrat',sans-serif;
+html,body{
+    width:100%;
+    height:100%;
     overflow:hidden;
-    background:black;
-    color:white;
+    font-family:'Montserrat',sans-serif;
 }
 
-/* BACKGROUND SLIDES */
+/* Background slideshow */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-3;
+}
 
 .slide{
-    position:fixed;
+    position:absolute;
     inset:0;
 
     background-size:cover;
     background-position:center center;
-    background-repeat:no-repeat;
 
     opacity:0;
-    transition:opacity 2.5s ease;
-
-    transform:scale(1.05);
+    transition:opacity 2s ease-in-out;
 }
 
 .slide.active{
     opacity:1;
 }
 
-/* ROCKSTAR OVERLAY */
+/* Rockstar colour grade */
 
 .overlay{
     position:fixed;
     inset:0;
+    z-index:-2;
 
     background:
-    linear-gradient(
-        to bottom,
-        rgba(8,0,20,.45),
-        rgba(20,0,45,.65),
-        rgba(10,0,25,.85)
-    );
-
-    z-index:3;
+        linear-gradient(
+            rgba(15,0,35,.45),
+            rgba(25,0,50,.65)
+        );
 }
 
-.overlay::before{
-    content:"";
-
-    position:absolute;
+.glow{
+    position:fixed;
     inset:0;
+    z-index:-1;
 
     background:
-    radial-gradient(
-        circle at center,
-        rgba(255,106,214,.12),
-        transparent 65%
-    );
+        radial-gradient(
+            circle at center,
+            rgba(255,80,220,.15),
+            transparent 60%
+        );
 }
 
-/* MAIN CONTENT */
+/* Main layout */
 
 .container{
-    position:relative;
-    z-index:10;
-
-    width:100%;
-    height:100vh;
+    min-height:100vh;
 
     display:flex;
-    align-items:center;
     justify-content:center;
-
-    text-align:center;
+    align-items:center;
 
     padding:20px;
 }
 
 .content{
     width:100%;
-    max-width:1400px;
+    max-width:1200px;
+
+    text-align:center;
 }
 
-/* LOGO */
+/* Logo */
 
 .logo{
-    width:min(850px,90vw);
+    width:min(650px,90vw);
+    max-width:100%;
 
     margin-bottom:30px;
 
     filter:
-    drop-shadow(0 0 20px rgba(255,80,220,.35))
-    drop-shadow(0 0 60px rgba(255,80,220,.15));
+        drop-shadow(0 0 20px rgba(255,100,220,.35))
+        drop-shadow(0 0 60px rgba(255,100,220,.20));
 }
 
-/* TEXT */
+/* Subtitle */
 
 .subtitle{
-    color:#c8f8ff;
-
-    letter-spacing:6px;
-
-    font-size:.9rem;
-
-    text-transform:uppercase;
-
-    margin-bottom:40px;
+    color:#ffffff;
+    letter-spacing:5px;
+    font-size:0.9rem;
+    margin-bottom:35px;
 }
 
-.release{
-    margin-top:40px;
-
-    color:#ff9de9;
-
-    letter-spacing:4px;
-
-    text-transform:uppercase;
-
-    font-size:.85rem;
-}
-
-/* COUNTDOWN */
+/* Countdown */
 
 .timer{
     display:flex;
     justify-content:center;
-    gap:20px;
     flex-wrap:wrap;
+    gap:20px;
 }
 
 .card{
+    min-width:180px;
 
-    width:200px;
+    background:rgba(0,0,0,.30);
 
-    background:
-    rgba(20,20,30,.35);
+    backdrop-filter:blur(12px);
 
-    backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.10);
 
     border-radius:24px;
 
-    padding:30px;
-
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.35);
+    padding:25px;
 }
 
 .number{
-    font-size:4.8rem;
+    font-size:4rem;
     font-weight:800;
-    line-height:1;
+    color:white;
 }
 
 .label{
     margin-top:10px;
 
-    color:#89f1ff;
+    color:#7eeeff;
 
-    letter-spacing:2px;
+    font-size:0.8rem;
 
-    font-size:.8rem;
+    letter-spacing:3px;
 }
 
-/* MOBILE */
+.release{
+    margin-top:35px;
+
+    color:#ff8de2;
+
+    letter-spacing:4px;
+
+    font-size:0.85rem;
+}
+
+/* Tablet */
 
 @media(max-width:900px){
 
     .card{
-        width:150px;
-        padding:25px;
+        min-width:140px;
     }
 
     .number{
         font-size:3rem;
     }
-
 }
+
+/* Mobile */
 
 @media(max-width:600px){
 
+    .logo{
+        width:85vw;
+    }
+
+    .timer{
+        gap:12px;
+    }
+
     .card{
-        width:130px;
+        min-width:130px;
+        padding:20px;
     }
 
     .number{
-        font-size:2.5rem;
+        font-size:2.4rem;
     }
 
     .subtitle{
         font-size:.75rem;
     }
 
+    .release{
+        font-size:.7rem;
+        padding:0 10px;
+    }
 }
 
 </style>
 </head>
 <body>
 
-<!-- Slideshow -->
+<div class="background">
 
-<div class="slide active" style="background-image:url('images/bg1.jpg');"></div>
-<div class="slide" style="background-image:url('images/bg2.jpg');"></div>
-<div class="slide" style="background-image:url('images/bg3.jpg');"></div>
-<div class="slide" style="background-image:url('images/bg4.jpg');"></div>
-<div class="slide" style="background-image:url('images/bg5.jpg');"></div>
+    <div class="slide active" style="background-image:url('images/bg1.jpg')"></div>
+    <div class="slide" style="background-image:url('images/bg2.jpg')"></div>
+    <div class="slide" style="background-image:url('images/bg3.jpg')"></div>
+    <div class="slide" style="background-image:url('images/bg4.jpg')"></div>
+    <div class="slide" style="background-image:url('images/bg5.jpg')"></div>
+
+</div>
 
 <div class="overlay"></div>
-
-<!-- Main Content -->
+<div class="glow"></div>
 
 <div class="container">
 
@@ -266,7 +264,7 @@ body{
         </div>
 
         <div class="release">
-            19 NOVEMBER 2026 • 12:00 AM AEST
+            19 NOVEMBER 2026 • 12:00 AM AEDT
         </div>
 
     </div>
@@ -275,65 +273,80 @@ body{
 
 <script>
 
-/* COUNTDOWN */
+/* Countdown */
 
-const target =
+const targetDate =
 new Date("2026-11-19T00:00:00+11:00").getTime();
 
-h1>NOW AVAILABLE</h1>";
+function updateCountdown(){
+
+    const now = Date.now();
+
+    const diff = targetDate - now;
+
+    if(diff <= 0){
+
+        document.querySelector(".timer").innerHTML =
+        "<h1 style='color:white;'>NOW AVAILABLE</h1>";
 
         return;
     }
 
     const days =
-    Math.floor(difference / (1000*60*60*24));
+    Math.floor(diff / (1000 * 60 * 60 * 24));
 
     const hours =
-    Math.floor((difference % (1000*60*60*24))
-    / (1000*60*60));
+    Math.floor(
+        (diff % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
 
     const minutes =
-    Math.floor((difference % (1000*60*60))
-    / (1000*60));
+    Math.floor(
+        (diff % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
 
     const seconds =
-    Math.floor((difference % (1000*60))
-    / 1000);
+    Math.floor(
+        (diff % (1000 * 60))
+        / 1000
+    );
 
-    document.getElementById("days").innerText =
+    document.getElementById("days").textContent =
     String(days).padStart(2,"0");
 
-    document.getElementById("hours").innerText =
+    document.getElementById("hours").textContent =
     String(hours).padStart(2,"0");
 
-    document.getElementById("minutes").innerText =
+    document.getElementById("minutes").textContent =
     String(minutes).padStart(2,"0");
 
-    document.getElementById("seconds").innerText =
+    document.getElementById("seconds").textContent =
     String(seconds).padStart(2,"0");
-
 }
 
-updateTimer();
-setInterval(updateTimer,1000);
+updateCountdown();
+setInterval(updateCountdown,1000);
 
-/* BACKGROUND SLIDESHOW */
+/* Background slideshow */
 
-const slides = document.querySelectorAll(".slide");
+const slides =
+document.querySelectorAll(".slide");
 
-let current = 0;
+let currentSlide = 0;
 
 setInterval(() => {
 
-    slides[current].classList.remove("active");
+    slides[currentSlide].classList.remove("active");
 
-    current++;
+    currentSlide++;
 
-    if(current >= slides.length){
-        current = 0;
+    if(currentSlide >= slides.length){
+        currentSlide = 0;
     }
 
-    slides[current].classList.add("active");
+    slides[currentSlide].classList.add("active");
 
 }, 8000);
 
