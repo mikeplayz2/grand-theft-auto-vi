@@ -6,10 +6,12 @@
 
 <title>Grand Theft Auto VI Countdown</title>
 
+<link rel="icon" type="image/png" href="logo.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -20,128 +22,122 @@
 }
 
 body{
-    overflow:hidden;
     font-family:'Montserrat',sans-serif;
-    background:#000;
+    overflow:hidden;
+    background:black;
     color:white;
 }
 
-/* BACKGROUND SLIDESHOW */
+/* BACKGROUND SLIDES */
 
-.bg{
+.slide{
     position:fixed;
     inset:0;
+
     background-size:cover;
-    background-position:center;
+    background-position:center center;
     background-repeat:no-repeat;
 
     opacity:0;
-    transition:opacity 2s ease;
+    transition:opacity 2.5s ease;
 
     transform:scale(1.05);
 }
 
-.bg.active{
+.slide.active{
     opacity:1;
 }
 
-.bg::after{
-    content:"";
-    position:absolute;
+/* ROCKSTAR OVERLAY */
+
+.overlay{
+    position:fixed;
     inset:0;
 
     background:
     linear-gradient(
-        rgba(20,0,40,.65),
-        rgba(20,0,40,.80)
+        to bottom,
+        rgba(8,0,20,.45),
+        rgba(20,0,45,.65),
+        rgba(10,0,25,.85)
     );
 
-    backdrop-filter:blur(2px);
+    z-index:3;
 }
 
-/* GTA VI COLOUR GRADE */
+.overlay::before{
+    content:"";
 
-.purple-glow{
-    position:fixed;
+    position:absolute;
     inset:0;
 
     background:
     radial-gradient(
         circle at center,
-        rgba(255,80,220,.20),
-        transparent 60%
+        rgba(255,106,214,.12),
+        transparent 65%
     );
-
-    z-index:5;
-    pointer-events:none;
 }
 
 /* MAIN CONTENT */
 
 .container{
     position:relative;
-    z-index:20;
+    z-index:10;
 
+    width:100%;
     height:100vh;
 
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:20px;
 }
 
 .content{
-    text-align:center;
-    padding:30px;
     width:100%;
     max-width:1400px;
 }
 
-/* TITLE */
+/* LOGO */
 
-.pretitle{
-    text-transform:uppercase;
-    letter-spacing:8px;
+.logo{
+    width:min(850px,90vw);
 
-    color:#ff9eea;
+    margin-bottom:30px;
 
-    font-size:.8rem;
-
-    margin-bottom:20px;
+    filter:
+    drop-shadow(0 0 20px rgba(255,80,220,.35))
+    drop-shadow(0 0 60px rgba(255,80,220,.15));
 }
 
-.title{
-
-    font-size:clamp(4rem,10vw,9rem);
-
-    font-weight:800;
-
-    line-height:.9;
-
-    background:
-    linear-gradient(
-        180deg,
-        #ffffff,
-        #ff80dd
-    );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    text-shadow:
-        0 0 30px rgba(255,95,220,.4);
-
-    margin-bottom:12px;
-}
+/* TEXT */
 
 .subtitle{
+    color:#c8f8ff;
 
-    color:#85f6ff;
+    letter-spacing:6px;
+
+    font-size:.9rem;
+
+    text-transform:uppercase;
+
+    margin-bottom:40px;
+}
+
+.release{
+    margin-top:40px;
+
+    color:#ff9de9;
 
     letter-spacing:4px;
 
-    margin-bottom:60px;
-
     text-transform:uppercase;
+
+    font-size:.85rem;
 }
 
 /* COUNTDOWN */
@@ -149,69 +145,51 @@ body{
 .timer{
     display:flex;
     justify-content:center;
-    gap:25px;
+    gap:20px;
     flex-wrap:wrap;
 }
 
 .card{
 
-    min-width:190px;
-
-    padding:35px;
-
-    border-radius:22px;
+    width:200px;
 
     background:
-        rgba(15,15,25,.35);
+    rgba(20,20,30,.35);
 
-    backdrop-filter:blur(16px);
+    backdrop-filter:blur(18px);
 
-    border:
-        1px solid rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+    padding:30px;
 
     box-shadow:
-        0 10px 40px rgba(0,0,0,.5),
-        0 0 30px rgba(255,95,220,.15);
+    0 15px 40px rgba(0,0,0,.35);
 }
 
 .number{
-
     font-size:4.8rem;
-
     font-weight:800;
-
     line-height:1;
 }
 
 .label{
-
     margin-top:10px;
 
-    color:#85f6ff;
+    color:#89f1ff;
+
+    letter-spacing:2px;
 
     font-size:.8rem;
-
-    letter-spacing:3px;
 }
 
-/* FOOTER */
+/* MOBILE */
 
-.release{
-    margin-top:50px;
-
-    color:#ff9eea;
-
-    letter-spacing:3px;
-
-    text-transform:uppercase;
-
-    opacity:.9;
-}
-
-@media(max-width:768px){
+@media(max-width:900px){
 
     .card{
-        min-width:140px;
+        width:150px;
         padding:25px;
     }
 
@@ -219,8 +197,20 @@ body{
         font-size:3rem;
     }
 
-    .title{
-        font-size:4rem;
+}
+
+@media(max-width:600px){
+
+    .card{
+        width:130px;
+    }
+
+    .number{
+        font-size:2.5rem;
+    }
+
+    .subtitle{
+        font-size:.75rem;
     }
 
 }
@@ -229,57 +219,54 @@ body{
 </head>
 <body>
 
-<!-- BACKGROUNDS -->
+<!-- Slideshow -->
 
-<div class="bg active" style="background-image:url('images/bg1.jpg')"></div>
-<div class="bg" style="background-image:url('images/bg2.jpg')"></div>
-<div class="bg" style="background-image:url('images/bg3.jpg')"></div>
-<div classimages/bg5.jpg')"></div>
+<div class="slide active" style="background-image:url('images/bg1.jpg');"></div>
+<div class="slide" style="background-image:url('images/bg2.jpg');"></div>
+<div class="slide" style="background-image:url('images/bg3.jpg');"></div>
+<div class="slide" style="background-image:url('images/bg4.jpg');"></div>
+<div class="slide" style="background-image:url('images/bg5.jpg');"></div>
 
-<div class="purple-glow"></div>
+<div class="overlay"></div>
+
+<!-- Main Content -->
 
 <div class="container">
 
     <div class="content">
 
-        <div class="pretitle">
-            Rockstar Games
-        </div>
-
-        <div class="title">
-            GTA VI
-        </div>
+        <img src="logo.png" alt="GTA VI Logo" class="logo">
 
         <div class="subtitle">
-            Countdown To Vice City
+            COUNTDOWN TO RELEASE
         </div>
 
         <div class="timer">
 
             <div class="card">
-                <div id="days" class="number">00</div>
+                <div class="number" id="days">00</div>
                 <div class="label">DAYS</div>
             </div>
 
             <div class="card">
-                <div id="hours" class="number">00</div>
+                <div class="number" id="hours">00</div>
                 <div class="label">HOURS</div>
             </div>
 
             <div class="card">
-                <div id="minutes" class="number">00</div>
+                <div class="number" id="minutes">00</div>
                 <div class="label">MINUTES</div>
             </div>
 
             <div class="card">
-                <div id="seconds" class="number">00</div>
+                <div class="number" id="seconds">00</div>
                 <div class="label">SECONDS</div>
             </div>
 
         </div>
 
         <div class="release">
-            19 November • 12:00 AM AEST
+            19 NOVEMBER 2026 • 12:00 AM AEST
         </div>
 
     </div>
@@ -290,40 +277,28 @@ body{
 
 /* COUNTDOWN */
 
-const targetDate =
-new Date("2026-11-19T00:00:00+10:00").getTime();
+const target =
+new Date("2026-11-19T00:00:00+11:00").getTime();
 
-function updateCountdown(){
+h1>NOW AVAILABLE</h1>";
 
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    if(distance <= 0){
-        document.querySelector(".timer").innerHTML =
-        "<h1>RELEASED</h1>";
         return;
     }
 
     const days =
-    Math.floor(distance/(1000*60*60*24));
+    Math.floor(difference / (1000*60*60*24));
 
     const hours =
-    Math.floor(
-        (distance%(1000*60*60*24))
-        /(1000*60*60)
-    );
+    Math.floor((difference % (1000*60*60*24))
+    / (1000*60*60));
 
     const minutes =
-    Math.floor(
-        (distance%(1000*60*60))
-        /(1000*60)
-    );
+    Math.floor((difference % (1000*60*60))
+    / (1000*60));
 
     const seconds =
-    Math.floor(
-        (distance%(1000*60))
-        /1000
-    );
+    Math.floor((difference % (1000*60))
+    / 1000);
 
     document.getElementById("days").innerText =
     String(days).padStart(2,"0");
@@ -336,15 +311,15 @@ function updateCountdown(){
 
     document.getElementById("seconds").innerText =
     String(seconds).padStart(2,"0");
+
 }
 
-updateCountdown();
-setInterval(updateCountdown,1000);
+updateTimer();
+setInterval(updateTimer,1000);
 
-/* SLIDESHOW */
+/* BACKGROUND SLIDESHOW */
 
-const slides =
-document.querySelectorAll(".bg");
+const slides = document.querySelectorAll(".slide");
 
 let current = 0;
 
