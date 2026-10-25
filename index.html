@@ -6,11 +6,10 @@
 
 <title>Grand Theft Auto VI Countdown</title>
 
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" href="logo.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -21,16 +20,19 @@
     box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
     width:100%;
-    height:100%;
-    overflow:hidden;
+    min-height:100%;
+    overflow-x:hidden;
     font-family:'Montserrat',sans-serif;
+    background:#000;
+    color:white;
 }
 
-/* Background slideshow */
+/* Background Slideshow */
 
-.background{
+.slideshow{
     position:fixed;
     inset:0;
     z-index:-3;
@@ -41,44 +43,47 @@ html,body{
     inset:0;
 
     background-size:cover;
-    background-position:center center;
+    background-position:center;
+    background-repeat:no-repeat;
 
     opacity:0;
-    transition:opacity 2s ease-in-out;
+    transition:opacity 2s ease;
 }
 
 .slide.active{
     opacity:1;
 }
 
-/* Rockstar colour grade */
+/* Purple Overlay */
 
 .overlay{
     position:fixed;
     inset:0;
-    z-index:-2;
 
     background:
         linear-gradient(
-            rgba(15,0,35,.45),
-            rgba(25,0,50,.65)
+            rgba(13,0,25,.45),
+            rgba(35,0,60,.55)
         );
+
+    z-index:-2;
 }
 
 .glow{
     position:fixed;
     inset:0;
-    z-index:-1;
 
     background:
         radial-gradient(
-            circle at center,
-            rgba(255,80,220,.15),
-            transparent 60%
+            circle,
+            rgba(255,70,220,.15),
+            transparent 65%
         );
+
+    z-index:-1;
 }
 
-/* Main layout */
+/* Layout */
 
 .container{
     min-height:100vh;
@@ -93,33 +98,32 @@ html,body{
 .content{
     width:100%;
     max-width:1200px;
-
     text-align:center;
 }
 
 /* Logo */
 
 .logo{
-    width:min(650px,90vw);
-    max-width:100%;
+    width:min(90vw,650px);
+    height:auto;
 
-    margin-bottom:30px;
+    margin-bottom:25px;
 
     filter:
-        drop-shadow(0 0 20px rgba(255,100,220,.35))
-        drop-shadow(0 0 60px rgba(255,100,220,.20));
+        drop-shadow(0 0 20px rgba(255,105,220,.4))
+        drop-shadow(0 0 50px rgba(255,105,220,.2));
 }
-
-/* Subtitle */
 
 .subtitle{
-    color:#ffffff;
     letter-spacing:5px;
     font-size:0.9rem;
-    margin-bottom:35px;
+
+    margin-bottom:40px;
+
+    color:#ffffff;
 }
 
-/* Countdown */
+/* Timer */
 
 .timer{
     display:flex;
@@ -129,15 +133,15 @@ html,body{
 }
 
 .card{
-    min-width:180px;
-
-    background:rgba(0,0,0,.30);
+    background:rgba(0,0,0,.3);
 
     backdrop-filter:blur(12px);
 
-    border:1px solid rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.1);
 
     border-radius:24px;
+
+    min-width:180px;
 
     padding:25px;
 }
@@ -145,65 +149,74 @@ html,body{
 .number{
     font-size:4rem;
     font-weight:800;
-    color:white;
 }
 
 .label{
-    margin-top:10px;
+    margin-top:8px;
 
-    color:#7eeeff;
-
-    font-size:0.8rem;
+    color:#85f7ff;
 
     letter-spacing:3px;
+
+    font-size:.8rem;
 }
 
 .release{
     margin-top:35px;
 
-    color:#ff8de2;
+    color:#ff9be7;
 
     letter-spacing:4px;
 
-    font-size:0.85rem;
+    font-size:.85rem;
 }
 
-/* Tablet */
+/* Music Button */
 
-@media(max-width:900px){
+.music-btn{
+    position:fixed;
 
-    .card{
-        min-width:140px;
-    }
+    top:20px;
+    right:20px;
 
-    .number{
-        font-size:3rem;
-    }
+    z-index:999;
+
+    background:rgba(0,0,0,.4);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    color:white;
+
+    padding:12px 18px;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    font-weight:600;
+}
+
+.music-btn:hover{
+    background:rgba(255,255,255,.1);
 }
 
 /* Mobile */
 
-@media(max-width:600px){
-
-    .logo{
-        width:85vw;
-    }
-
-    .timer{
-        gap:12px;
-    }
+@media(max-width:768px){
 
     .card{
-        min-width:130px;
+        min-width:140px;
         padding:20px;
     }
 
     .number{
-        font-size:2.4rem;
+        font-size:3rem-size:2.3rem;
     }
 
     .subtitle{
-        font-size:.75rem;
+        font-size:.7rem;
     }
 
     .release{
@@ -216,7 +229,9 @@ html,body{
 </head>
 <body>
 
-<div class="background">
+<!-- Backgrounds -->
+
+<div class="slideshow">
 
     <div class="slide active" style="background-image:url('images/bg1.jpg')"></div>
     <div class="slide" style="background-image:url('images/bg2.jpg')"></div>
@@ -228,6 +243,18 @@ html,body{
 
 <div class="overlay"></div>
 <div class="glow"></div>
+
+<!-- Music -->
+
+<audio id="bgMusic" loop>
+    audio/music.mp3
+</audio>
+
+<button id="musicButton" class="music-btn">
+    🔊 Music
+</button>
+
+<!-- Content -->
 
 <div class="container">
 
@@ -242,22 +269,22 @@ html,body{
         <div class="timer">
 
             <div class="card">
-                <div class="number" id="days">00</div>
+                <div id="days" class="number">00</div>
                 <div class="label">DAYS</div>
             </div>
 
             <div class="card">
-                <div class="number" id="hours">00</div>
+                <div id="hours" class="number">00</div>
                 <div class="label">HOURS</div>
             </div>
 
             <div class="card">
-                <div class="number" id="minutes">00</div>
+                <div id="minutes" class="number">00</div>
                 <div class="label">MINUTES</div>
             </div>
 
             <div class="card">
-                <div class="number" id="seconds">00</div>
+                <div id="seconds" class="number">00</div>
                 <div class="label">SECONDS</div>
             </div>
 
@@ -275,80 +302,100 @@ html,body{
 
 /* Countdown */
 
-const targetDate =
-new Date("2026-11-19T00:00:00+11:00").getTime();
+const targetDate = new Date(
+    "2026-11-19T00:00:00+11:00"
+).getTime();
 
 function updateCountdown(){
 
     const now = Date.now();
-
     const diff = targetDate - now;
 
     if(diff <= 0){
 
         document.querySelector(".timer").innerHTML =
-        "<h1 style='color:white;'>NOW AVAILABLE</h1>";
+        '<h1>NOW AVAILABLE</h1>';
 
         return;
     }
 
     const days =
-    Math.floor(diff / (1000 * 60 * 60 * 24));
+        Math.floor(diff / (1000*60*60*24));
 
     const hours =
-    Math.floor(
-        (diff % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-    );
+        Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
 
     const minutes =
-    Math.floor(
-        (diff % (1000 * 60 * 60))
-        / (1000 * 60)
-    );
+        Math.floor((diff % (1000*60*60)) / (1000*60));
 
     const seconds =
-    Math.floor(
-        (diff % (1000 * 60))
-        / 1000
-    );
+        Math.floor((diff % (1000*60)) / 1000);
 
     document.getElementById("days").textContent =
-    String(days).padStart(2,"0");
+        String(days).padStart(2,"0");
 
     document.getElementById("hours").textContent =
-    String(hours).padStart(2,"0");
+        String(hours).padStart(2,"0");
 
     document.getElementById("minutes").textContent =
-    String(minutes).padStart(2,"0");
+        String(minutes).padStart(2,"0");
 
     document.getElementById("seconds").textContent =
-    String(seconds).padStart(2,"0");
+        String(seconds).padStart(2,"0");
 }
 
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-/* Background slideshow */
+/* Slideshow */
 
-const slides =
-document.querySelectorAll(".slide");
-
-let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+let current = 0;
 
 setInterval(() => {
 
-    slides[currentSlide].classList.remove("active");
+    slides[current].classList.remove("active");
 
-    currentSlide++;
+    current++;
 
-    if(currentSlide >= slides.length){
-        currentSlide = 0;
+    if(current >= slides.length){
+        current = 0;
     }
 
-    slides[currentSlide].classList.add("active");
+    slides[current].classList.add("active");
 
 }, 8000);
+
+/* Music */
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicButton");
+
+music.volume = 0.4;
+
+let started = false;
+
+document.addEventListener("click", () => {
+
+    if(!started){
+
+        music.play().catch(() => {});
+        started = true;
+    }
+
+},{
+    once:true
+});
+
+musicBtn.addEventListener("click", () => {
+
+    music.muted = !music.muted;
+
+    musicBtn.textContent =
+        music.muted
+        ? "🔇 Muted"
+        : "🔊 Music";
+});
 
 </script>
 
