@@ -243,8 +243,9 @@ show">
 <div class="overlay"></div>
 <div class="glow"></div>
 
-<audio id="bgMusic" loop>
-    audio/music.mp3
+<audio id="bgMusic" loop preload="auto">
+    <source src="audio/music.mp3" type="audio/mpeg">
+    Your browser does not support audio.
 </audio>
 
 <button id="musicButton" class="music-btn">
@@ -366,36 +367,34 @@ setInterval(() => {
 
 }, 8000);
 
-/* MUSIC */
-
+/* Music */
+    
 const music = document.getElementById("bgMusic");
 const musicButton = document.getElementById("musicButton");
 
-music.volume = 0.4;
+music.volume = 0.5;
 
-musicButton.addEventListener("click", async () => {
+musicButton.addEventListener("click", () => {
 
-    try{
+    if (music.paused) {
 
-        if(music.paused){
+        music.play()
+            .then(() => {
+                musicButton.textContent = "🔇 Mute";
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("Music failed to start.");
+            });
 
-            await music.play();
-            musicButton.textContent = "🔇 Mute";
+    } else {
 
-        }else{
-
-            music.pause();
-            musicButton.textContent = "▶ Play Music";
-
-        }
-
-    }catch(err){
-
-        alert("Could not play music. Check audio/music.mp3 exists.");
+        music.pause();
+        musicButton.textContent = "▶ Play Music";
     }
 
 });
-
+    
 </script>
 
 </body>
